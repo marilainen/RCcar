@@ -3,8 +3,8 @@ from dotenv import dotenv_values
 import RPi.GPIO as GPIO
 import servo
 
-# Init needed variables and get config from env file
-# Remember to insert correct values to carconfig.env, including correct GPIO mode
+# Configuration from env file
+# When running the program remotely, change carconfig to full file path
 config = dotenv_values("carconfig.env")
 gpio_mode = config["GPIO_MODE"]
 ultrasonic_trigger = config["ULTRASONIC_TRIGGER_PIN"]
