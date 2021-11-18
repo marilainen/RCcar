@@ -20,12 +20,10 @@ class MainProgram:
         
         self.nxp_host = self.config["NXP_IP"]
         self.nxp_user = self.config["NXP_USER"]
-        self.nxp_pw = self.config["NXP_PW"]
         self.nxp_cmd =  self.config["NXP_CMD"]
         
         self.rpi_host = self.config["RPI_IP"]
         self.rpi_user = self.config["RPI_USER"]
-        self.rpi_pw = self.config["RPI_PW"]
         self.rpi_cmd =  self.config["RPI_CMD"]
         self.key_path = self.config["KEY_PATH"]
         self.key = paramiko.RSAKey.from_private_key_file(os.path.expanduser(self.key_path))
