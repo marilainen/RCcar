@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+
 '''
 **********************************************************************
 Code source: https://github.com/sunfounder/SunFounder_PCA9685
