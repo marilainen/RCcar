@@ -10,7 +10,7 @@ gpio_mode = config["GPIO_MODE"]
 ultrasonic_trigger = config["ULTRASONIC_TRIGGER_PIN"]
 ultrasonic_echo = config["ULTRASONIC_ECHO_PIN"]
 ultrasonic_servo_channel = config["ULTRASONIC_SERVO_CHANNEL"]
-ultrasonic_servo = servo.Servo(ultrasonic_servo_channel)
+ultrasonic_servo = servo.Servo(int(ultrasonic_servo_channel))
 ultrasonic_servo.setup()
 
 GPIO.setmode(gpio_mode)
