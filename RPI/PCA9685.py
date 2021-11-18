@@ -236,7 +236,7 @@ class PWM(object):
         prescale = math.floor(prescale_value + 0.5)
         self._debug_('Final pre-scale: %d' % prescale)
 
-        old_mode = self._read_byte_data(self._MODE1);
+        old_mode = self._read_byte_data(self._MODE1)
         new_mode = (old_mode & 0x7F) | 0x10
         self._write_byte_data(self._MODE1, new_mode)
         self._write_byte_data(self._PRESCALE, int(math.floor(prescale)))
