@@ -1,7 +1,7 @@
 import time
 from dotenv import dotenv_values
 import RPi.GPIO as GPIO
-import servo
+from adafruit_servokit import ServoKit
 
 # Configuration from env file
 # When running the program remotely, change carconfig to full file path
@@ -10,8 +10,9 @@ gpio_mode = config["GPIO_MODE"]
 ultrasonic_trigger = config["ULTRASONIC_TRIGGER_PIN"]
 ultrasonic_echo = config["ULTRASONIC_ECHO_PIN"]
 ultrasonic_servo_channel = config["ULTRASONIC_SERVO_CHANNEL"]
-ultrasonic_servo = servo.Servo(int(ultrasonic_servo_channel), 0x70)
-ultrasonic_servo.setup()
+kit = ServoKit(channels=16)
+ultrasonic_servo = kit.servo[int(ultrasonic_servo_channel)]
+ultrasonic_servo.angle = 90
 
 GPIO.setmode(gpio_mode)
 GPIO.setup(ultrasonic_trigger, GPIO.OUT)
@@ -39,13 +40,13 @@ def distance():
         print("Error getting data from ultrasonic sensor {}".format(error))
 
 def distance_to_right():
-    ultrasonic_servo.write(180)
+    ultrasonic_servo.angle = 180
     right_distance = distance()
-    ultrasonic_servo.write(90)
+    ultrasonic_servo.angle = 90
     return right_distance
 
 def distance_to_left():
-    ultrasonic_servo.write(0)
+    ultrasonic_servo.angle = 0
     left_distance = distance()
-    ultrasonic_servo.write(90)
+    ultrasonic_servo.angle = 90
     return left_distance
