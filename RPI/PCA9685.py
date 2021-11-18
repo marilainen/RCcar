@@ -168,7 +168,6 @@ class PWM(object):
             self.bus.write_byte_data(self.address, reg, value)
         except Exception as i:
             print(i)
-            self._check_i2c()
 
     def _read_byte_data(self, reg):
         '''Read data from I2C with self.address'''
@@ -178,47 +177,6 @@ class PWM(object):
             return results
         except Exception as i:
             print(i)
-            self._check_i2c()
-
-    def _check_i2c(self):
-        import commands
-        bus_number = self._get_bus_number()
-        print("\nYour Pi Rivision is: %s" % self._get_pi_revision())
-        print("I2C bus number is: %s" % bus_number)
-        print("Checking I2C device:")
-        cmd = "ls /dev/i2c-%d" % bus_number
-        output = commands.getoutput(cmd)
-        print('Commands "%s" output:' % cmd)
-        print(output)
-        if '/dev/i2c-%d' % bus_number in output.split(' '):
-            print("I2C device setup OK")
-        else:
-            print("Seems like I2C have not been set, Use 'sudo raspi-config' to set I2C")
-        cmd = "i2cdetect -y %s" % self.bus_number
-        output = commands.getoutput(cmd)
-        print("Your PCA9685 address is set to 0x%02X" % self.address)
-        print("i2cdetect output:")
-        print(output)
-        outputs = output.split('\n')[1:]
-        addresses = []
-        for tmp_addresses in outputs:
-            tmp_addresses = tmp_addresses.split(':')[1]
-            tmp_addresses = tmp_addresses.strip().split(' ')
-            for address in tmp_addresses:
-                if address != '--':
-                    addresses.append(address)
-        print("Conneceted i2c device:")
-        if addresses == []:
-            print("None")
-        else:
-            for address in addresses:
-                print("  0x%s" % address)
-        if "%02X" % self.address in addresses:
-            print("Wierd, I2C device is connected, Try to run the program again, If problem stills, email this information to support@sunfounder.com")
-        else:
-            print("Device is missing.")
-            print("Check the address or wiring of PCA9685 Server driver, or email this information to support@sunfounder.com")
-        raise IOError('IO error')
 
     @property
     def frequency(self):
