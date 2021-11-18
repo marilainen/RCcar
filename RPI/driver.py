@@ -19,7 +19,7 @@ class Driver:
         self.left_motor = self.config["LEFT_MOTOR_PIN"]
         self.right_motor = self.config["RIGHT_MOTOR_PIN"]
         self.steer_servo_channel = self.config["RIGHT_MOTOR_PIN"]
-        self.steer_servo = servo.Servo(self.steer_servo_channel)
+        self.steer_servo = servo.Servo(int(self.steer_servo_channel))
         self.steer_servo.setup()
         
     def exit(self, signum, frame):  
