@@ -16,8 +16,8 @@ class Driver:
         # When running the program remotely, change carconfig to full file path
         self.config = dotenv_values("carconfig.env")
         self.gpio_mode = self.config["GPIO_MODE"]
-        self.left_motor = self.config["LEFT_MOTOR_PIN"]
-        self.right_motor = self.config["RIGHT_MOTOR_PIN"]
+        self.left_motor = int(self.config["LEFT_MOTOR_PIN"])
+        self.right_motor = int(self.config["RIGHT_MOTOR_PIN"])
         self.steer_servo_channel = self.config["RIGHT_MOTOR_PIN"]
         self.steer_servo = servo.Servo(int(self.steer_servo_channel))
         self.steer_servo.setup()
