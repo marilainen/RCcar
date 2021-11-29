@@ -7,8 +7,8 @@ from adafruit_servokit import ServoKit
 # When running the program remotely, change carconfig to full file path
 config = dotenv_values("carconfig.env")
 gpio_mode = config["GPIO_MODE"]
-ultrasonic_trigger = config["ULTRASONIC_TRIGGER_PIN"]
-ultrasonic_echo = config["ULTRASONIC_ECHO_PIN"]
+ultrasonic_trigger = int(config["ULTRASONIC_TRIGGER_PIN"])
+ultrasonic_echo = int(config["ULTRASONIC_ECHO_PIN"])
 ultrasonic_servo_channel = config["ULTRASONIC_SERVO_CHANNEL"]
 kit = ServoKit(channels=16)
 ultrasonic_servo = kit.servo[int(ultrasonic_servo_channel)]
